@@ -14,14 +14,16 @@ import Header from './header';
 import NavMini from './nav/NavMini';
 import NavVertical from './nav/NavVertical';
 import NavHorizontal from './nav/NavHorizontal';
+import { BottomNavigation } from '../bottom-navigation';
 
 // ----------------------------------------------------------------------
 
 DashboardLayout.propTypes = {
   children: PropTypes.node,
+  pageTitle: PropTypes.string.isRequired,
 };
 
-export default function DashboardLayout({ children }) {
+export default function DashboardLayout({ pageTitle, children }) {
   const { themeLayout } = useSettingsContext();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -75,7 +77,7 @@ export default function DashboardLayout({ children }) {
     // }
 
     <>
-      <Header onOpenNav={handleOpen} />
+      <Header onOpenNav={handleOpen} pageTitle={pageTitle} />
 
       <Box
         sx={{
@@ -83,11 +85,13 @@ export default function DashboardLayout({ children }) {
           minHeight: { lg: 1 },
         }}
       >
+        <BottomNavigation />
+
         {/* {renderNavVertical} */}
 
         <Main>{children}</Main>
       </Box>
     </>
   );
-  return <AuthGuard> {renderContent()} </AuthGuard>;
+  return <AuthGuard> {renderContent()}</AuthGuard>;
 }

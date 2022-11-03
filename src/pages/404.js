@@ -10,6 +10,7 @@ import CompactLayout from '../layouts/compact';
 import { MotionContainer, varBounce } from '../components/animate';
 // assets
 import { PageNotFoundIllustration } from '../assets/illustrations';
+import { PATH_DASHBOARD } from '@routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -47,7 +48,7 @@ export default function Page404() {
           />
         </m.div>
 
-        <NextLink href="/" passHref>
+        <NextLink href={PATH_DASHBOARD.root} passHref>
           <Button size="large" variant="contained">
             Go to Home
           </Button>

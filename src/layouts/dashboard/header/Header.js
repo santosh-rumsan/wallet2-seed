@@ -14,19 +14,20 @@ import Logo from '../../../components/logo';
 import Iconify from '../../../components/iconify';
 import { useSettingsContext } from '../../../components/settings';
 //
-import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import ContactsPopover from './ContactsPopover';
 import NotificationsPopover from './NotificationsPopover';
+import BackButton from './BackButton';
 
 // ----------------------------------------------------------------------
 
 Header.propTypes = {
   onOpenNav: PropTypes.func,
+  pageTitle: PropTypes.string.isRequired,
 };
 
-export default function Header({ onOpenNav }) {
+export default function Header({ pageTitle, onOpenNav }) {
   const theme = useTheme();
 
   const { themeLayout } = useSettingsContext();
@@ -42,21 +43,15 @@ export default function Header({ onOpenNav }) {
   const renderContent = (
     <>
       {isDesktop && isNavHorizontal && <Logo sx={{ mr: 2.5 }} />}
-
-      {!isDesktop && (
+      {/* {!isDesktop && (
         <IconButton onClick={onOpenNav} sx={{ mr: 1, color: 'text.primary' }}>
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
-      )}
-
-      <Searchbar />
-
+      )} */}
+      <BackButton />
+      {pageTitle}
       <Stack flexGrow={1} direction="row" alignItems="center" justifyContent="flex-end" spacing={{ xs: 0.5, sm: 1.5 }}>
-        <LanguagePopover />
-
         <NotificationsPopover />
-
-        <ContactsPopover />
 
         <AccountPopover />
       </Stack>
